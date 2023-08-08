@@ -18,7 +18,7 @@ jobs:
         key: ${{ secrets.AWS_POM }}
       run: |
         echo "$key" > key.pem
-        chmod 600 key
+        chmod 600 key.pem
         mkdir -p ~/.ssh
         cp known_hosts ~/.ssh/known_hosts
         ssh -t -i key.pem ubuntu@ec2-65-1-248-170.ap-south-1.compute.amazonaws.com 
