@@ -21,4 +21,4 @@ jobs:
         chmod 600 key
         mkdir -p ~/.ssh
         cp known_hosts ~/.ssh/known_hosts
-        ssh -t -i key ubuntu@ec2-65-1-248-170.ap-south-1.compute.amazonaws.com "source script.sh"
+        ssh -t -i key ubuntu@ec2-65-1-248-170.ap-south-1.compute.amazonaws.com 
