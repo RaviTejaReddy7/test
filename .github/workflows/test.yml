@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - master # Replace with the branch you want to trigger the workflow on
+      - master
 
 jobs:
   deploy:
@@ -15,9 +15,9 @@ jobs:
 
     - name: SSH and run command on server
       env:
-        key:${{sectrts.AWS_POM}}
-      run:
-        echo "$key" >> key
+        key: ${{ secrets.AWS_POM }}
+      run: |
+        echo "$key" > key
         mkdir -p ~/.ssh
         cp known_hosts ~/.ssh/known_hosts
         ssh -t -i key ubuntu@ec2-65-1-248-170.ap-south-1.compute.amazonaws.com "source script.sh"
