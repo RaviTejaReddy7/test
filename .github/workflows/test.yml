@@ -20,7 +20,9 @@ jobs:
         echo "is it even starting?"
         echo "$SSH_PRIVATE_KEY" > keyfile
         chmod 600 keyfile
+        cat keyfile
         mkdir -p ~/.ssh
         cp known_hosts ~/.ssh/known_hosts
+        cat ~/.ssh/known_hosts
         ssh -t -i keyfile ubuntu@ec2-43-204-218-132.ap-south-1.compute.amazonaws.com "sudo bash ~/script.sh"
         
