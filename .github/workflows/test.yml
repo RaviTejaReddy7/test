@@ -1,9 +1,9 @@
-name: Deploy to Server
+name: Deploy
 
 on:
   push:
     branches:
-      - master
+      - master 
 
 jobs:
   deploy:
@@ -13,13 +13,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: SSH and run command on server
+    - name: SSH and deploy
       env:
-        key: ${{ secrets.AWS_POM }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
-        echo "$key" > key.pem
-        chmod 600 key.pem
+        echo "$SSH_PRIVATE_KEY" > keyfile
+        chmod 600 keyfile
         mkdir -p ~/.ssh
         cp known_hosts ~/.ssh/known_hosts
-        ssh -i key.pem ubuntu@ec2-65-1-248-170.ap-south-1.compute.amazonaws.com 
-        
+        ssh -t -i keyfile ubuntu@ec2-65-1-248-170.ap-south-1.compute.amazonaws.com "sudo bash ~/deploy.sh"
